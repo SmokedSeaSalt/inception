@@ -1,6 +1,32 @@
+volumes:
+  WordPress:
+    name: WordPress
+  DB:
+    name: DB
+
 services:
   nginx:
     build:
       context: ./requirements/nginx
     ports:
       - 1443:1443
+    volumes:
+      - WordPress:/etc/wordpressvolume
+    env_file:
+      - .env
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    volumes:
+      - WordPress:/etc/wordpressvolume
+    env_file:
+      - .env
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    volumes:
+      - DB:/etc/mariadbvolume
+    env_file:
+      - .env
