@@ -10,6 +10,7 @@ services:
       - .env
     secrets:
       - nginx_key
+      - nginx_crt
 
   wordpress:
     build:
@@ -36,12 +37,14 @@ volumes:
 #https://docs.docker.com/compose/how-tos/use-secrets/
 secrets:
   db_password:
-    file: secrets/db_password.txt
-  db_root)password:
-    file: secrets/db_root_password.txt
-
-#one of these not really secret?
+    file: ./secrets/db_password.txt
+  db_root_password:
+    file: ./secrets/db_root_password.txt
   nginx_crt:
-    file: secrets/inception.crt
+    file: ./secrets/inception.crt
   nginx_key:
-    file: secrets/inception.key
+    file: ./secrets/inception.key
+
+networks:
+  inception:
+    name: inception
