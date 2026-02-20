@@ -1,9 +1,3 @@
-volumes:
-  WordPress:
-    name: WordPress
-  DB:
-    name: DB
-
 services:
   nginx:
     build:
@@ -11,15 +5,17 @@ services:
     ports:
       - 1443:1443
     volumes:
-      - WordPress:/etc/wordpressvolume
+      - WordPress:/var/www/html
     env_file:
       - .env
+    secrets:
+      - nginx_key
 
   wordpress:
     build:
       context: ./requirements/wordpress
     volumes:
-      - WordPress:/etc/wordpressvolume
+      - WordPress:/var/www/html
     env_file:
       - .env
 
@@ -27,6 +23,25 @@ services:
     build:
       context: ./requirements/mariadb
     volumes:
-      - DB:/etc/mariadbvolume
+      - DB:/var/lib/mysql
     env_file:
       - .env
+
+volumes:
+  WordPress:
+    name: WordPress
+  DB:
+    name: DB
+
+#https://docs.docker.com/compose/how-tos/use-secrets/
+secrets:
+  db_password:
+    file: secrets/db_password.txt
+  db_root)password:
+    file: secrets/db_root_password.txt
+
+#one of these not really secret?
+  nginx_crt:
+    file: secrets/inception.crt
+  nginx_key:
+    file: secrets/inception.key
