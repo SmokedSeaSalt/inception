@@ -19,7 +19,7 @@ up:
 	docker-compose -p inception -f srcs/docker-compose.yml up --build
 
 down:
-	docker-compose -p inception -f srcs/docker-compose.yml down -v
+	docker-compose -p inception -f srcs/docker-compose.yml down
 
 
 ################################################################################
