@@ -19,6 +19,12 @@ services:
       - WordPress:/var/www/html
     env_file:
       - .env
+    environment:
+      DB_ADMIN_PASSWORD_FILE: /run/secrets/db_admin_password
+      WP_DB_USER1_PASSWORD_FILE: /run/secrets/db_user1_password
+    secrets:
+      - db_admin_password
+      - db_user1_password
 
   mariadb:
     build:
@@ -27,6 +33,12 @@ services:
       - DB:/var/lib/mysql
     env_file:
       - .env
+    environment:
+      DB_ADMIN_PASSWORD_FILE: /run/secrets/db_admin_password
+      DB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    secrets:
+      - db_admin_password
+      - db_root_password
 
 volumes:
   WordPress:
@@ -36,8 +48,10 @@ volumes:
 
 #https://docs.docker.com/compose/how-tos/use-secrets/
 secrets:
-  db_password:
-    file: ./secrets/db_password.txt
+  db_admin_password:
+    file: ./secrets/db_admin_password.txt
+  db_user1_password:
+    file: ./secrets/db_user1_password.txt
   db_root_password:
     file: ./secrets/db_root_password.txt
   nginx_crt:
