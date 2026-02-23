@@ -4,31 +4,22 @@ mkdir -p /run/mysqld
 
 chown -R mysql:mysql /run/mysqld
 
+ls /var/lib/mysql
+
 # Listen to all ports to be able to receive wordpress requests
 echo "bind-address=0.0.0.0" >> /etc/mysql/mariadb.conf.d/50-server.cnf
 
-# Run mariadb as child process
-mariadbd --user=mysql --skip-networking & pid="$!"
+WP_ADMIN_PASSWORD=$(cat $DB_ADMIN_PASSWORD_FILE)
+WP_ROOT_PASSWORD=$(cat $DB_ROOT_PASSWORD_FILE)
 
-# Wait for child process db to start up
+mariadbd --user=mysql --bootstrap <<EOF
+	USE mysql;
+	FLUSH PRIVILEGES;
 
-until mariadb -u root -e "SELECT 1;" &>/dev/null; do
-	echo "Waiting for db to start up..."
-	sleep 1
-done
-
-# setup db
-cat > db1.sql <<EOF
 	CREATE DATABASE IF NOT EXISTS $DB_NAME;
-	CREATE USER '$DB_ADMIN_USER'@'%' IDENTIFIED BY '$DB_ADMIN_PASS';
-	GRANT ALL PRIVILEGES ON *.* TO '$DB_ADMIN_USER'@'%' WITH GRANT OPTION;
+	CREATE USER '$DB_ADMIN_USER'@'%' IDENTIFIED BY '$WP_ADMIN_PASSWORD';
+	GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_ADMIN_USER'@'%';
 	FLUSH PRIVILEGES;
 EOF
-
-mariadb -u root -p"$DB_ROOT_PASSWORD" < db1.sql
-
-kill "$pid"
-wait "$pid"
-
 
 exec mariadbd --user=mysql
