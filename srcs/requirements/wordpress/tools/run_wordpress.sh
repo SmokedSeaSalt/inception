@@ -5,12 +5,15 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 
 echo -e "\n\n"
 
+WP_ADMIN_PASSWORD=$(cat $DB_ADMIN_PASSWORD_FILE)
 
-# sleep 5
-
-until mariadb -h "$DB_HOST" -u "$DB_ADMIN_USER" -p"$DB_ADMIN_PASS" -e "SHOW DATABASES;" &>/dev/null; do
-	echo "Waiting for db to start up..."
-	sleep 1
+until mysqladmin ping \
+  -h"$DB_HOST" \
+  -u"$DB_ADMIN_USER" \
+  -p"$WP_ADMIN_PASSWORD" \
+  --silent; do
+    echo "Waiting for db to start up..."
+    sleep 1
 done
 
 chmod +x wp-cli.phar
@@ -37,7 +40,7 @@ wp core download --locale=en_US --allow-root
 sed \
 	-e "s/database_name_here/$DB_NAME/" \
 	-e "s/username_here/$DB_ADMIN_USER/" \
-	-e "s/password_here/$DB_ADMIN_PASS/" \
+	-e "s/password_here/$WP_ADMIN_PASSWORD/" \
 	-e "s/localhost/$DB_HOST/" \
 	wp-config-sample.php > wp-config.php
 
@@ -51,13 +54,14 @@ wp core install \
 	--admin_email=$WP_ADMIN_EMAIL \
 	--allow-root
 
+WP_DB_USER1_PASSWORD=$(cat $WP_DB_USER1_PASSWORD_FILE)
 
 # Create second user https://developer.wordpress.org/cli/commands/user/create/
-wp user get $WP_ADDITIONAL_USER --allow-root &>/dev/null || \
+wp user get $WP_DB_USER1 --allow-root &>/dev/null || \
 wp user create \
-	$WP_ADDITIONAL_USER \
-	$WP_ADDITIONAL_USER_EMAIL \
-	--user_pass=$WP_ADDITIONAL_USER_PASSWORD \
+	$WP_DB_USER1 \
+	$WP_DB_USER1_EMAIL \
+	--user_pass=$WP_DB_USER1_PASSWORD \
 	--role=author \
 	--allow-root
 
