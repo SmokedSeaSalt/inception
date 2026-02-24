@@ -4,8 +4,6 @@ mkdir -p /run/mysqld
 
 chown -R mysql:mysql /run/mysqld
 
-ls /var/lib/mysql
-
 # Listen to all ports to be able to receive wordpress requests
 echo "bind-address=0.0.0.0" >> /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -17,7 +15,7 @@ mariadbd --user=mysql --bootstrap <<EOF
 	FLUSH PRIVILEGES;
 
 	CREATE DATABASE IF NOT EXISTS $DB_NAME;
-	CREATE USER '$DB_ADMIN_USER'@'%' IDENTIFIED BY '$WP_ADMIN_PASSWORD';
+	CREATE USER IF NOT EXISTS '$DB_ADMIN_USER'@'%' IDENTIFIED BY '$WP_ADMIN_PASSWORD';
 	GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_ADMIN_USER'@'%';
 	FLUSH PRIVILEGES;
 EOF
