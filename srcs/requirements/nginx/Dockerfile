@@ -5,7 +5,6 @@ FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y nginx
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY index.html /var/www/html/index.html
 
 EXPOSE 1443
 
