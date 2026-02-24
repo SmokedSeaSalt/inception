@@ -1,5 +1,7 @@
 services:
   nginx:
+    depends_on:
+      - wordpress
     build:
       context: ./requirements/nginx
     ports:
@@ -13,6 +15,8 @@ services:
       - nginx_crt
 
   wordpress:
+    depends_on:
+      - mariadb
     build:
       context: ./requirements/wordpress
     volumes:
