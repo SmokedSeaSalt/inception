@@ -7,12 +7,26 @@ echo -e "\n\n"
 
 WP_ADMIN_PASSWORD=$(cat $DB_ADMIN_PASSWORD_FILE)
 
-until mysqladmin ping \
+
+# Make sure wordpress database is accessable
+MAX_TRIES=30
+TRIES=0
+
+mysql -u"$DB_HOST" -p$(cat /run/secrets/db_root_password) -e 'USE $DB_NAME;'
+
+until mysql \
   -h"$DB_HOST" \
   -u"$DB_ADMIN_USER" \
   -p"$WP_ADMIN_PASSWORD" \
-  --silent; do
-    echo "Waiting for db to start up..."
+  -e 'USE mariadb;'; do
+    TRIES=$((TRIES + 1))
+
+    if [ "$TRIES" -ge "$MAX_TRIES" ]; then
+        echo "MariaDB did not become ready after $MAX_TRIES attempts"
+        exit 1
+    fi
+
+    echo "Waiting for MariaDB... ($TRIES/$MAX_TRIES tries)"
     sleep 1
 done
 
