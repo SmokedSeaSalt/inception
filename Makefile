@@ -32,7 +32,7 @@ down:
 SSL_KEY_PASS = srcs/secrets/inception.pass.key
 SSL_KEY = srcs/secrets/inception.key
 SSL_CRT = srcs/secrets/inception.crt
-SSL_SUBJ = "/C=NL/ST=North-Holland/L=Amsterdam/O=Codam/CN=localhost"
+SSL_SUBJ = "/C=NL/ST=North-Holland/L=Amsterdam/O=Codam/CN=inception"
 
 generate_key: #| $(SSL_CRT)
 	openssl genrsa -aes256 -passout pass:inception -out $(SSL_KEY_PASS) 4096
