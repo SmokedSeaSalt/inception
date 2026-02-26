@@ -13,6 +13,7 @@ services:
     secrets:
       - nginx_key
       - nginx_crt
+    restart: unless-stopped
 
   wordpress:
     depends_on:
@@ -30,6 +31,8 @@ services:
     secrets:
       - db_admin_password
       - db_user1_password
+    restart: unless-stopped
+
 
   mariadb:
     build:
@@ -50,6 +53,7 @@ services:
       timeout: 3s
       retries: 10
       start_period: 20s
+    restart: unless-stopped
 
 volumes:
   WordPress:
