@@ -16,7 +16,8 @@ services:
 
   wordpress:
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     build:
       context: ./requirements/wordpress
     volumes:
@@ -43,6 +44,12 @@ services:
     secrets:
       - db_admin_password
       - db_root_password
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -uhealth -phealthpass -h 127.0.0.1 --silent || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 20s
 
 volumes:
   WordPress:
