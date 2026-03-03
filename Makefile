@@ -24,6 +24,18 @@ up:
 down:
 	docker-compose -p inception -f srcs/docker-compose.yml down
 
+################################################################################
+# Local Env                                                                          #
+################################################################################
+
+copy_env:
+	cp ~/Desktop/InceptionLocal/InceptionEnv ./srcs/.env
+
+copy_secrets:
+	mkdir ./srcs/secrets
+	cp ~/Desktop/InceptionLocal/db_admin_password.txt ./srcs/secrets/db_admin_password.txt
+	cp ~/Desktop/InceptionLocal/db_root_password.txt ./srcs/secrets/db_root_password.txt
+	cp ~/Desktop/InceptionLocal/db_user1_password.txt ./srcs/secrets/db_user1_password.txt
 
 ################################################################################
 # SSL                                                                          #
