@@ -48,13 +48,12 @@ sed \
 	-e "s/localhost/$DB_HOST/" \
 	wp-config-sample.php > wp-config.php
 
-# Temp fix for browser redirect to localhost:443
-echo "define('WP_HOME', 'https://localhost:1443'); \
-define('WP_SITEURL', 'https://localhost:1443');" >> wp-config.php
+echo "define('WP_HOME', 'https://$DOMAIN_NAME'); \
+define('WP_SITEURL', 'https://$DOMAIN_NAME');" >> wp-config.php
 
 # Install wp https://developer.wordpress.org/cli/commands/core/install/
 wp core install \
-	--url=$WP_URL \
+	--url='https://$DOMAIN_NAME:443' \
 	--title=$WP_TITLE \
 	--admin_user=$WP_ADMIN_USER \
 	--admin_password=$WP_ADMIN_PASSWORD \

@@ -5,7 +5,7 @@ services:
     build:
       context: ./requirements/nginx
     ports:
-      - 1443:1443
+      - 443:443
     volumes:
       - WordPress:/var/www/html
     env_file:

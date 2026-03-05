@@ -10,6 +10,6 @@ COPY tools/run_nginx.sh /etc/nginx/run_nginx.sh
 
 RUN chmod +x /etc/nginx/run_nginx.sh
 
-EXPOSE 1443
+EXPOSE 443
 
 CMD ["/etc/nginx/run_nginx.sh"]
