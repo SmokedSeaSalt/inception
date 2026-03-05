@@ -58,8 +58,18 @@ services:
 volumes:
   WordPress:
     name: WordPress
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mvan-rij/data/WordPress
   DB:
     name: DB
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mvan-rij/data/DB
 
 #https://docs.docker.com/compose/how-tos/use-secrets/
 secrets:

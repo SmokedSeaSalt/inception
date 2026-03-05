@@ -14,6 +14,8 @@ re: down all
 # Docker                                                                       #
 ################################################################################
 
+setup_volume:
+	mkdir -p /home/mvan-rij/data/WordPress /home/mvan-rij/data/DB
 
 clean:
 	docker-compose -p inception -f srcs/docker-compose.yml down -v
