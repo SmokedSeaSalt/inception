@@ -7,7 +7,7 @@
 
 all: up
 
-re: down all
+re: clean all
 
 
 ################################################################################
@@ -18,13 +18,13 @@ setup_volume:
 	mkdir -p /home/mvan-rij/data/WordPress /home/mvan-rij/data/DB
 
 clean:
-	docker-compose -p inception -f srcs/docker-compose.yml down -v
+	docker compose -p inception -f srcs/docker-compose.yml down -v
 
 up:
-	docker-compose -p inception -f srcs/docker-compose.yml up --build
+	docker compose -p inception -f srcs/docker-compose.yml up --build
 
 down:
-	docker-compose -p inception -f srcs/docker-compose.yml down
+	docker compose -p inception -f srcs/docker-compose.yml down
 
 ################################################################################
 # Local Env                                                                    #
