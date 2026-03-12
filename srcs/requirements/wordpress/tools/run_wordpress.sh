@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Setup wp https://make.wordpress.org/cli/handbook/guides/installing/
+#[W1]
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 echo -e "\n\n"
@@ -37,7 +37,7 @@ cd /var/www/html
 
 rm -rf *
 
-# Download wp https://developer.wordpress.org/cli/commands/core/download/
+# Download wp [W4]
 wp core download --locale=en_US --allow-root
 
 # Replace wp-config-sample.php with wp-config.php and fill in credentials
@@ -51,7 +51,7 @@ sed \
 echo "define('WP_HOME', 'https://$DOMAIN_NAME'); \
 define('WP_SITEURL', 'https://$DOMAIN_NAME');" >> wp-config.php
 
-# Install wp https://developer.wordpress.org/cli/commands/core/install/
+# Install wp [W2]
 wp core install \
 	--url='https://$DOMAIN_NAME:443' \
 	--title=$WP_TITLE \
@@ -62,7 +62,7 @@ wp core install \
 
 WP_DB_USER1_PASSWORD=$(cat $WP_DB_USER1_PASSWORD_FILE)
 
-# Create second user https://developer.wordpress.org/cli/commands/user/create/
+# Create second user [W6]
 wp user get $WP_DB_USER1 --allow-root &>/dev/null || \
 wp user create \
 	$WP_DB_USER1 \
@@ -72,7 +72,7 @@ wp user create \
 	--allow-root
 
 
-# configure php-fpm to listen to 9000 to communicate with nginx
+# configure php-fpm to listen to 9000 to communicate with nginx[W3]
 sed -i "s#listen = /run/php/php8.2-fpm.sock#listen = 0.0.0.0:9000#" /etc/php/8.2/fpm/pool.d/www.conf
 
 # dpkg -L php-fpm

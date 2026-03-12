@@ -10,7 +10,7 @@ echo "bind-address=0.0.0.0" >> /etc/mysql/mariadb.conf.d/50-server.cnf
 WP_ADMIN_PASSWORD=$(cat $DB_ADMIN_PASSWORD_FILE)
 WP_ROOT_PASSWORD=$(cat $DB_ROOT_PASSWORD_FILE)
 
-# Start MariaDB temporarily
+# Start MariaDB temporarily 
 mariadbd --user=mysql --skip-networking & pid="$!"
 
 
@@ -29,7 +29,7 @@ until mysqladmin ping --silent; do
     sleep 1
 done
 
-# Configure database and users
+# Configure database and users [M2]
 mysql <<EOF
 	USE mysql;
 
