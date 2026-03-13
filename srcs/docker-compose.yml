@@ -44,9 +44,11 @@ services:
     environment:
       DB_ADMIN_PASSWORD_FILE: /run/secrets/db_admin_password
       DB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      DB_DEFAULT_USER_PASSWORD_FILE: /run/secrets/db_default_user_password
     secrets:
       - db_admin_password
       - db_root_password
+      - db_default_user_password
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -uhealth -phealthpass -h 127.0.0.1 --silent || exit 1"]
       interval: 5s
@@ -79,6 +81,8 @@ secrets:
     file: ./secrets/db_user1_password.txt
   db_root_password:
     file: ./secrets/db_root_password.txt
+  db_default_user_password:
+    file: ./secrets/db_default_user_password.txt
   nginx_crt:
     file: ./secrets/inception.crt
   nginx_key:

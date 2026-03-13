@@ -9,6 +9,7 @@ echo "bind-address=0.0.0.0" >> /etc/mysql/mariadb.conf.d/50-server.cnf
 
 WP_ADMIN_PASSWORD=$(cat $DB_ADMIN_PASSWORD_FILE)
 WP_ROOT_PASSWORD=$(cat $DB_ROOT_PASSWORD_FILE)
+DB_DEFAULT_USER_PASSWORD=$(cat $DB_DEFAULT_USER_PASSWORD_FILE)
 
 # Start MariaDB temporarily 
 mariadbd --user=mysql --skip-networking & pid="$!"
@@ -30,7 +31,7 @@ until mysqladmin ping --silent; do
 done
 
 # Configure database and users [M2]
-mysql <<EOF
+mysql -uroot -p"${WP_ROOT_PASSWORD}" <<EOF
 	USE mysql;
 
 	CREATE DATABASE IF NOT EXISTS $DB_NAME;
@@ -50,6 +51,10 @@ mysql <<EOF
 
 	CREATE USER IF NOT EXISTS '$DB_ADMIN_USER'@'%' IDENTIFIED BY '$WP_ADMIN_PASSWORD';
 	GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_ADMIN_USER'@'%';
+
+	CREATE USER IF NOT EXISTS '$DB_DEFAULT_USER'@'%' IDENTIFIED BY '$DB_DEFAULT_USER_PASSWORD';
+	GRANT SELECT ON $DB_NAME.* TO '$DB_DEFAULT_USER'@'%';
+
 	FLUSH PRIVILEGES;
 EOF
 
