@@ -58,6 +58,8 @@ Bind Mounts allow a file or directory from the host system to be mounted directl
 
 ## Instructions
 
+TODO
+
 ## Recources
 
 ### Docker
@@ -70,6 +72,7 @@ Bind Mounts allow a file or directory from the host system to be mounted directl
 [D6]  [Named volume at different host location](https://cravencode.com/post/docker/create-named-docker-bind-mount/)\
 [D7]  [Running commands inside container](https://docs.docker.com/reference/cli/docker/container/exec/)\
 [D8]  [Docker Volume VS Bind Mount](https://www.geeksforgeeks.org/devops/docker-volume-vs-bind-mount/)
+[D9]  [Debian image](https://hub.docker.com/layers/library/debian/bookworm-slim/images/sha256-993f5593466f84c9200e3e877ab5902dfc0e4a792f291c25c365dbe89833411f)
 
 ### Nginx
 
@@ -92,6 +95,8 @@ Bind Mounts allow a file or directory from the host system to be mounted directl
 [W4]  [Downloader for wp-cli](https://developer.wordpress.org/cli/commands/core/download/)
 [W5]  [Config settings](https://developer.wordpress.org/apis/wp-config-php/)
 [W6]  [Create extra users](https://developer.wordpress.org/cli/commands/user/create/)
+[W7]  [WP cli interface](https://github.com/wp-cli/wp-cli)
 
 ### AI
-Ai was used to create part of the .md documentation.
+- Ai was used to create part of the .md documentation.
+- Ai was used as part of research when the documentation did not provide a working solution. No AI output was directly used.

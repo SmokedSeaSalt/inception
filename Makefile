@@ -9,6 +9,7 @@ all: up
 
 re: clean all
 
+.PHONY: all re setup_volume clean up start down stop copy_env copy_secrets generate_key
 
 ################################################################################
 # Docker                                                                       #
@@ -23,8 +24,12 @@ clean:
 up:
 	docker compose -p inception -f srcs/docker-compose.yml up --build
 
+start: up
+
 down:
 	docker compose -p inception -f srcs/docker-compose.yml down
+
+stop: down
 
 ################################################################################
 # Local Env                                                                    #
