@@ -58,7 +58,30 @@ Bind Mounts allow a file or directory from the host system to be mounted directl
 
 ## Instructions
 
-TODO
+### Prerequisits
+
+This project requires docker and docker compose to be installed.
+
+### Configuration files
+
+A .env_example is provided for the administrator to setup a desired .env.
+
+### Secrets
+
+The secrets should be in the srcs/secrets directory.
+The needed secrets for the current configuration are:
+- srcs/secrets/db_admin_password.txt
+- srcs/secrets/db_default_user_password.txt
+- srcs/secrets/db_root_password.txt
+- srcs/secrets/wp_admin_password.txt
+- srcs/secrets/wp_user1_password.txt
+
+### Build and launch the server.
+
+1. git clone this repository.
+2. cd into the cloned directory.
+3. check [Configuration files](#configuration-files) and [Secrets](#secrets) to setup the environment correctly.
+4. ```make```.
 
 ## Recources
 

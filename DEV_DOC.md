@@ -17,7 +17,8 @@ The needed secrets for the current configuration are:
 - srcs/secrets/db_admin_password.txt
 - srcs/secrets/db_default_user_password.txt
 - srcs/secrets/db_root_password.txt
-- srcs/secrets/db_user1_password.txt
+- srcs/secrets/wp_admin_password.txt
+- srcs/secrets/wp_user1_password.txt
 
 ## Build and launch the server.
 
@@ -28,14 +29,18 @@ The needed secrets for the current configuration are:
 
 ## Usefull commands
 
+### Docker
+
+- [docker ps](https://docs.docker.com/reference/cli/docker/container/ls/)
+- [docker network](https://docs.docker.com/reference/cli/docker/network/)
+- [docker exec](https://docs.docker.com/reference/cli/docker/container/exec/)
+
+### MariaDB
+
+- use [database]
+- SELECT * from wp_*; (add \G for formatting)
+
 ## Data storage
 
-
-
-
-
-DEV_DOC.md — Developer documentation This file must describe how a developer can:
-◦ Set up the environment from scratch (prerequisites, configuration files, secrets).
-◦ Build and launch the project using the Makefile and Docker Compose.
-◦ Use relevant commands to manage the containers and volumes.
-◦ Identify where the project data is stored and how it persists.
+The docker volumes are stored at ~/mvan-rij/data.
+To delete the database the command ```make delete_volumes``` can be used.

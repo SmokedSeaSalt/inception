@@ -5,7 +5,7 @@
 # General                                                                      #
 ################################################################################
 
-all: up
+all: setup_volume up
 
 re: clean all
 
@@ -21,6 +21,9 @@ setup_volume:
 clean:
 	docker compose -p inception -f srcs/docker-compose.yml down -v
 
+delete_volumes:
+	sudo rm -rf /home/mvan-rij/data/*
+	
 up:
 	docker compose -p inception -f srcs/docker-compose.yml up --build
 
