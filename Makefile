@@ -5,11 +5,22 @@
 # General                                                                      #
 ################################################################################
 
-all: setup_volume up
+all: setup setup_volume up
 
 re: clean all
 
-.PHONY: all re setup_volume clean up start down stop copy_env copy_secrets generate_key
+setup:
+	@if [ ! -f srcs/.env ]; then \
+		$(MAKE) copy_env; \
+	fi
+	@if [ ! -d srcs/secrets ]; then \
+		$(MAKE) copy_secrets; \
+	fi
+	@if [ ! -f srcs/secrets/inception.key ]; then \
+		$(MAKE) generate_key; \
+	fi
+
+.PHONY: all re setup setup_volume clean delete_volumes up start down stop copy_env copy_secrets generate_key
 
 ################################################################################
 # Docker                                                                       #
@@ -39,13 +50,15 @@ stop: down
 ################################################################################
 
 copy_env:
-	cp ~/Desktop/InceptionLocal/InceptionEnv ./srcs/.env
+	cp ~/Desktop/InceptionLocal/.env_local ./srcs/.env
 
 copy_secrets:
 	mkdir ./srcs/secrets
 	cp ~/Desktop/InceptionLocal/db_admin_password.txt ./srcs/secrets/db_admin_password.txt
+	cp ~/Desktop/InceptionLocal/db_default_user_password.txt ./srcs/secrets/db_default_user_password.txt
 	cp ~/Desktop/InceptionLocal/db_root_password.txt ./srcs/secrets/db_root_password.txt
-	cp ~/Desktop/InceptionLocal/db_user1_password.txt ./srcs/secrets/db_user1_password.txt
+	cp ~/Desktop/InceptionLocal/wp_user1_password.txt ./srcs/secrets/wp_user1_password.txt
+	cp ~/Desktop/InceptionLocal/wp_admin_password.txt ./srcs/secrets/wp_admin_password.txt
 
 ################################################################################
 # SSL                                                                          #
