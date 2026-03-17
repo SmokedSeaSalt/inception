@@ -26,11 +26,13 @@ services:
     env_file:
       - .env
     environment:
+      WP_ADMIN_PASSWORD_FILE: /run/secrets/wp_admin_password
+      WP_USER1_PASSWORD_FILE: /run/secrets/wp_user1_password
       DB_ADMIN_PASSWORD_FILE: /run/secrets/db_admin_password
-      WP_DB_USER1_PASSWORD_FILE: /run/secrets/db_user1_password
     secrets:
+      - wp_admin_password
+      - wp_user1_password
       - db_admin_password
-      - db_user1_password
     restart: unless-stopped
 
 
@@ -76,10 +78,12 @@ volumes:
 
 #[D3]
 secrets:
+  wp_user1_password:
+    file: ./secrets/wp_user1_password.txt
+  wp_admin_password:
+    file: ./secrets/wp_admin_password.txt
   db_admin_password:
     file: ./secrets/db_admin_password.txt
-  db_user1_password:
-    file: ./secrets/db_user1_password.txt
   db_root_password:
     file: ./secrets/db_root_password.txt
   db_default_user_password:
