@@ -122,4 +122,4 @@ The needed secrets for the current configuration are:
 
 ### AI
 - Ai was used to create part of the .md documentation.
-- Ai was used as part of research when the documentation did not provide a working solution. No AI output was directly used.
+- Ai was used as part of research when the documentation did not provide a working solution.
