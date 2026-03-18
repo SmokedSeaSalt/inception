@@ -9,6 +9,7 @@ This project requires docker and docker compose to be installed.
 ### Configuration files
 
 A .env_example is provided for the administrator to setup a desired .env.
+Make sure localhost(127.0.0.1) is rerouted to mvan-rij.42.fr by adding ```127.0.0.1	mvan-rij.42.fr``` to /etc/hosts.
 
 ### Secrets
 

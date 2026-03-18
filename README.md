@@ -1,4 +1,4 @@
-This project has been created as part of the 42 curriculum by mvan-rij.
+*This project has been created as part of the 42 curriculum by mvan-rij.*
 
 ## Description
 This project aims to broaden the knowledge of system administration by using Docker.
@@ -65,6 +65,7 @@ This project requires docker and docker compose to be installed.
 ### Configuration files
 
 A .env_example is provided for the administrator to setup a desired .env.
+Make sure localhost(127.0.0.1) is rerouted to mvan-rij.42.fr by adding ```127.0.0.1	mvan-rij.42.fr``` to /etc/hosts.
 
 ### Secrets
 
