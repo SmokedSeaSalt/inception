@@ -95,7 +95,7 @@ The needed secrets for the current configuration are:
 [D5]  [Startup order](https://docs.docker.com/compose/how-tos/startup-order/)\
 [D6]  [Named volume at different host location](https://cravencode.com/post/docker/create-named-docker-bind-mount/)\
 [D7]  [Running commands inside container](https://docs.docker.com/reference/cli/docker/container/exec/)\
-[D8]  [Docker Volume VS Bind Mount](https://www.geeksforgeeks.org/devops/docker-volume-vs-bind-mount/)
+[D8]  [Docker Volume VS Bind Mount](https://www.geeksforgeeks.org/devops/docker-volume-vs-bind-mount/)\
 [D9]  [Debian image](https://hub.docker.com/layers/library/debian/bookworm-slim/images/sha256-993f5593466f84c9200e3e877ab5902dfc0e4a792f291c25c365dbe89833411f)
 
 ### Nginx
@@ -116,9 +116,9 @@ The needed secrets for the current configuration are:
 [W1]  [Install Worpress](https://make.wordpress.org/cli/handbook/guides/installing/)\
 [W2]  [Manage WordPress installation](https://developer.wordpress.org/cli/commands/core/)\
 [W3]  [Configuration the Listen Directive](https://serversforhackers.com/c/php-fpm-configuration-the-listen-directive)\
-[W4]  [Downloader for wp-cli](https://developer.wordpress.org/cli/commands/core/download/)
-[W5]  [Config settings](https://developer.wordpress.org/apis/wp-config-php/)
-[W6]  [Create extra users](https://developer.wordpress.org/cli/commands/user/create/)
+[W4]  [Downloader for wp-cli](https://developer.wordpress.org/cli/commands/core/download/)\
+[W5]  [Config settings](https://developer.wordpress.org/apis/wp-config-php/)\
+[W6]  [Create extra users](https://developer.wordpress.org/cli/commands/user/create/)\
 [W7]  [WP cli interface](https://github.com/wp-cli/wp-cli)
 
 ### AI
