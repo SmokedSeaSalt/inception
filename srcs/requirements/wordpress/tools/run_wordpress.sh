@@ -7,6 +7,7 @@ echo -e "\n\n"
 
 WP_ADMIN_PASSWORD=$(cat $WP_ADMIN_PASSWORD_FILE)
 DB_ADMIN_PASSWORD=$(cat $DB_ADMIN_PASSWORD_FILE)
+WP_USER1_PASSWORD=$(cat $WP_USER1_PASSWORD_FILE)
 
 
 # Make sure wordpress database is accessable
@@ -68,7 +69,7 @@ wp user get $WP_DB_USER1 --allow-root &>/dev/null || \
 wp user create \
 	$WP_USER1 \
 	$WP_USER1_EMAIL \
-	--user_pass=$WP_DB_USER1_PASSWORD \
+	--user_pass=$WP_USER1_PASSWORD \
 	--role=author \
 	--allow-root
 
